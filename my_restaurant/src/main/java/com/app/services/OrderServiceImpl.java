@@ -166,22 +166,22 @@ public class OrderServiceImpl implements OrderService {
 			}
 			order.setOrderStatus(OrderStatus.CANCELLED);
 			//get table 
-//			DineTable table = dineTableDao.findById(order.getBookedTable())
-//			.orElseThrow(()->new ResourceNotFound("Table Not Found"));
-//			//set table status to open
-//			table.setStatus(TableStatus.OPEN);
-//			
-//			//Get Booking Slot;
-//			TableBookingSlot slot = slotDao.findByBookingSlot(order.getReservationTime());
-//			if(slot==null) {
-//				throw new RuntimeException("Booking Slot Not Found");
-//			}
-//			//remove Slot from table;
-//			table.removeSlot(slot);
-//			//remove orderedfood record
-//			order.getFoods().stream()
-//				.forEach((orderedFood)->orderedFoodDao.delete(orderedFood));
-//			
+			DineTable table = dineTableDao.findById(order.getBookedTable())
+			.orElseThrow(()->new ResourceNotFound("Table Not Found"));
+			//set table status to open
+			table.setStatus(TableStatus.OPEN);
+			
+			//Get Booking Slot;
+			TableBookingSlot slot = slotDao.findByBookingSlot(order.getReservationTime());
+			if(slot==null) {
+				throw new RuntimeException("Booking Slot Not Found");
+			}
+			//remove Slot from table;
+			table.removeSlot(slot);
+			//remove orderedfood record
+			order.getFoods().stream()
+				.forEach((orderedFood)->orderedFoodDao.delete(orderedFood));
+		
 //			//delete order from user
 //			user.cancelOrder(order);
 //			//remove order from database
